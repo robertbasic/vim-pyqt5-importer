@@ -2,6 +2,7 @@ function! pyqt5importer#pyqt5ImportClass()
 python3 << endpython3
 import vim
 from pyqt5importer import importer
+from pyqt5importer import packages
 
 def import_class():
 
@@ -22,6 +23,16 @@ def import_class():
     if is_imported:
         print("%s is already imported." % (current_class))
         return
+
+    pyqt5_json_path = vim.eval('g:pyqt5importer_pyqt5_json_path')
+
+    package = packages.find_class_package(current_class, pyqt5_json_path)
+
+    if not package:
+        print("No PyQt5 package found %s" % (current_class))
+        return
+
+    print("%s package found for %s" % (package, current_class))
 
 import_class()
 
