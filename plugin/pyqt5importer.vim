@@ -5,7 +5,9 @@ let g:pyqt5importer_plugin_loaded = 1
 
 let g:pyqt5importer_plugin_path = expand('<sfile>:p:h')
 
-let g:pyqt5importer_pyqt5_json_path = expand('~/.vim/pyqt5.json')
+if !exists('g:pyqt5importer_pyqt5_json_path')
+    let g:pyqt5importer_pyqt5_json_path = expand('~/.vim/pyqt5.json')
+endif
 
 call pyqt5importer#SetupPyImports()
 
