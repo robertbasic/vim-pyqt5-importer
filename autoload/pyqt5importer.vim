@@ -16,7 +16,14 @@ def import_class():
     current_buffer = vim.current.buffer
     buffer_range = current_buffer.range(1, len(current_buffer))
 
-    import_lines = list(filter(importer.is_import_line, buffer_range))
+    import_lines = []
+    last_import_line_number = 0
+    for line_number in range(len(current_buffer)):
+        current_range = current_buffer.range(line_number, line_number)
+        for line in current_range:
+            if importer.is_import_line(line):
+                import_lines.append(line)
+                last_import_line_number = line_number
 
     is_imported = importer.is_pyqt5_class_imported(current_class, import_lines)
 
@@ -33,6 +40,9 @@ def import_class():
         return
 
     print("%s package found for %s" % (package, current_class))
+
+    import_line = "from PyQt5.%s import %s" % (package, current_class)
+    current_buffer.append(import_line, last_import_line_number)
 
 import_class()
 
