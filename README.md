@@ -8,6 +8,12 @@ Usage
 
 Call `:PyQt5ImportClass` over a word that represents a PyQt5 class.
 
+Map it to a leader shortcut, for example:
+
+``` vim
+map <leader>pi :PyQt5ImportClass<cr>
+```
+
 Requirements
 ============
 
