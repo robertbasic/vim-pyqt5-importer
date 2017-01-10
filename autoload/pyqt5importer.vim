@@ -5,11 +5,11 @@ from pyqt5importer import importer
 
 def import_class():
 
-    current_word = vim.eval('expand("<cword>")')
-    is_pyqt5_class = importer.is_pyqt5_class(current_word)
+    current_class = vim.eval('expand("<cword>")')
+    is_pyqt5_class = importer.is_pyqt5_class(current_class)
 
     if not is_pyqt5_class:
-        print("%s is not a PyQt5 class." % (current_word))
+        print("%s is not a PyQt5 class." % (current_class))
         return
 
     current_buffer = vim.current.buffer
@@ -17,10 +17,10 @@ def import_class():
 
     import_lines = list(filter(importer.is_import_line, buffer_range))
 
-    is_imported = importer.is_pyqt5_class_imported(current_word, import_lines)
+    is_imported = importer.is_pyqt5_class_imported(current_class, import_lines)
 
     if is_imported:
-        print("%s is already imported." % (current_word))
+        print("%s is already imported." % (current_class))
         return
 
 import_class()
